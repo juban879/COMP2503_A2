@@ -12,6 +12,15 @@ public class SLL<T extends Comparable<T>> {
 		size = 0;
 		comparator = null;
 	}
+
+	public void addAvengerToStart(T data) {
+	}
+
+	public void addAvengerToEnd(T data) {
+	}
+
+	public void addInOrder(T data) {
+	}
 	
 	public boolean isEmpty() {
 		if (start == null)
@@ -62,16 +71,60 @@ public class SLL<T extends Comparable<T>> {
 		
 	}
 	
-	private void addAvenger(Node<T> n) {
+	private void addAvengerToStart(Node<T> n) {
 		
 		
 	}
-	
-	private void deleteAvenger(Node<T> n) {
+
+	private void addAvengerToEnd(Node<T> n) {
+
 		
 	}
 
-	private void find(Node<T> n) {
+	// it kept giving me an error so type changed to Object - idk if thats right, i feel like it def isn't
+	private Object deleteAvenger(T key) {
+		Node<T> currentAvenger = start;
+		Node<T> previousAvenger = start;
+		while (currentAvenger != null) {
+			if (currentAvenger.getData().equals(key)) {
+				if (start == end) {
+					start = null;
+					end = null;
+					return currentAvenger;
+				}
+				
+				if (currentAvenger == start)
+					start = currentAvenger.getNext();
+				else {
+					previousAvenger.setNext(currentAvenger.getNext());
+				}
+				
+				if (currentAvenger == end) {
+					end = previousAvenger;
+				}
+				
+				return currentAvenger;
+			}
+			
+			else { 
+				previousAvenger = currentAvenger;
+				currentAvenger = currentAvenger.getNext();
+			}
+		}
+		
+		return null;
+		
+	}
 
+	private Node<T> findAvenger(T key) {
+		Node<T> currentAvenger = start;
+		while (currentAvenger != null) {
+			if (currentAvenger.getData().equals(key))
+				return currentAvenger;
+			else 
+				currentAvenger = currentAvenger.getNext();
+		}
+		
+		return null;
 	}
 }
