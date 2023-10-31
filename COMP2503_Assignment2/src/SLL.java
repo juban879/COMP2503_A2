@@ -73,7 +73,7 @@ public class SLL<T extends Comparable<T>> {
 	 * depending and compares and sorts the the avengers accordingly
 	 * @param n
 	 */
-	public void addInOrder(Node<T> n) {
+	private void addInOrder(Node<T> n) {
 		
 		if (isEmpty()) {
 			addAvengerToStart(n);
@@ -97,12 +97,13 @@ public class SLL<T extends Comparable<T>> {
 		}
 		
 	}
+	public void addInOrder(T data) {addInOrder(new Node<>(data));}
 
 	/**
 	 * This method adds the Avenger node to the start of the list
 	 * @param n
 	 */
-	public void addAvengerToStart(Node<T> n) {
+	private void addAvengerToStart(Node<T> n) {
 		
 		if (isEmpty()) {
 			start = n;
@@ -114,28 +115,29 @@ public class SLL<T extends Comparable<T>> {
 		
 		
 	}
-
+	public void addAvengerToStart(T data) {addAvengerToStart(new Node<>(data));}
 	/**
 	 * This method adds the Avenger node to the end of the list
 	 * @param n
 	 */
-	public void addAvengerToEnd(Node<T> n) {
+	private void addAvengerToEnd(Node<T> nodeToAdd) {
 		
 		if (isEmpty()) {
-			addAvengerToStart(n);
+			addAvengerToStart(nodeToAdd);
 		} else {
-			end.setNext(n);
-			end = n;
+			end.setNext(nodeToAdd);
+			end = nodeToAdd;
 		}
 	
 	}
+	public void addAvengerToEnd (T data) {addAvengerToEnd(new Node<>(data));}
 
 	/**
 	 * Remove an Avenger node method
 	 * @param key
 	 * @return
 	 */
-	public Object deleteAvenger(T key) {
+	private Node<T> deleteAvenger(T key) {
 		Node<T> currentAvenger = start;
 		Node<T> previousAvenger = start;
 		while (currentAvenger != null) {
@@ -174,26 +176,32 @@ public class SLL<T extends Comparable<T>> {
 	 * @param avg
 	 * @return Avenger being searched for in the list
 	 */
-	public Node<T> findAvenger(T avg) {
+	private Node<T> findNode(T data) {
+		
 		Node<T> currentAvenger = start; // mover node
 		while (currentAvenger != null) {
 			
-			if (currentAvenger.getData().equals(avg)) 
+			if (currentAvenger.getData().equals(data)) 
 			{
 				return currentAvenger;
 			}
 			currentAvenger = currentAvenger.getNext();
-
 		}
 		return null;
 	}
+	public T findAvenger(T data) {
+		if(findNode(data) == null)
+			return null;
+		return findNode(data).getData();
+		}
+
 	
 	/**
 	 * Method used to get a specific node by traversing list 
 	 * @param i
 	 * @return Node<T> node to be returned
 	 */
-	public Node<T> get(int i){
+	private Node<T> get(int i){
 		int len = size();
 		Node<T> nodeToGet = null;
 		

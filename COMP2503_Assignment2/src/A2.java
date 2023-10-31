@@ -52,14 +52,11 @@ public class A2 {
 	private void createdOrderedLists() {
 		Node<Avenger> mover =  mentionList.start;
 		while(mover != null) {
-			Node<Avenger> avg = new Node<>(mover.getData());
+			Avenger avg = mover.getData();
 			alphabticalList.addInOrder(avg);
-			
-			
-			avg = new Node<>(mover.getData());
+		
 			mostPopularAvenger.addInOrder(avg);
 			
-			avg = new Node<>(mover.getData());
 			mostPopularPerformer.addInOrder(avg);
 			mover = mover.getNext();	
 		}
@@ -92,13 +89,12 @@ public class A2 {
 					continue;
 				} else {
 				
-					Node<Avenger> n =  mentionList.findAvenger(newAvengerObject);
-					if ( n == null) {
+					Avenger avg =  mentionList.findAvenger(newAvengerObject);
+					if ( avg == null) {
 						newAvengerObject.addFrequency(word);
-						Node<Avenger> newNode = new Node<>(newAvengerObject);
-						mentionList.addAvengerToEnd(newNode);
+						mentionList.addAvengerToEnd(newAvengerObject);
 					} else {
-						n.getData().addFrequency(word);
+						avg.addFrequency(word);
 					}
 				}
 			}
