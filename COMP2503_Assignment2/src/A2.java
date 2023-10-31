@@ -23,11 +23,10 @@ public class A2 {
 	private int totalwordcount = 0;
 	private Scanner input = new Scanner(System.in);
 	
-	
-//	private SLL<Avenger> mentionList = new SLL<Avenger>();
-//	private SLL<Avenger> alphabticalList = new SLL<Avenger>();
-//	private SLL<Avenger> mostPopularAvenger = new SLL<Avenger>(new AvengerComparatorFreqDesc());
-//	private SLL<Avenger> mostPopularPerformer = new SLL<Avenger>(new AvengerPerformerComparatorFreqDesc());
+	private SLL<Avenger> mentionList = new SLL<Avenger>();
+	private SLL<Avenger> alphabticalList = new SLL<Avenger>();
+	private SLL<Avenger> mostPopularAvenger = new SLL<Avenger>(new AvengerComparatorFreqDesc());
+	private SLL<Avenger> mostPopularPerformer = new SLL<Avenger>(new AvengerPerformerComparatorFreqDesc());
 	
 	public static void main(String[] args) {
 		A2 a1 = new A2();
@@ -49,6 +48,19 @@ public class A2 {
 		//       (The better solution is to create an iterator, but we haven't learned about them, 
 		// 		  will talk about iterators later.)
 		*/ 
+		Node<Avenger> mover =  mentionList.start;
+		while(mover != null) {
+			Node<Avenger> avg = new Node<>(mover.getData());
+			alphabticalList.addInOrder(avg);
+			
+			
+			avg = new Node<>(mover.getData());
+			mostPopularAvenger.addInOrder(avg);
+			
+			avg = new Node<>(mover.getData());
+			mostPopularPerformer.addInOrder(avg);
+			mover = mover.getNext();	
+		}
 	}
 
 	/**
@@ -71,11 +83,35 @@ public class A2 {
 			String word = cleanWord(input.next());
 
 			if (word.length() > 0) {
-				// TODO:
+				totalwordcount++;
+				Avenger newAvengerObject = createAvengerObject(word);
+				if (newAvengerObject == null) {
+					continue;
+				} else {
+				
+					Node<Avenger> n =  mentionList.findAvenger(newAvengerObject);
+					if ( n == null) {
+						newAvengerObject.addFrequency(word);
+						Node<Avenger> newNode = new Node<>(newAvengerObject);
+						mentionList.addAvengerToEnd(newNode);
+					} else {
+						n.getData().addFrequency(word);
+					}
+				}
 			}
 		}
 	}
-	
+		
+	private Avenger createAvengerObject(String word) {
+			for (int i = 0; i < avengerRoster.length; i++) {
+				if (avengerRoster[i][0].equals(word) || avengerRoster[i][1].equals(word)
+						|| avengerRoster[i][2].equals(word)) {
+					return new Avenger(avengerRoster[i][0], avengerRoster[i][1], avengerRoster[i][2]);
+				}
+			}
+			return null;
+		}
+
 	private String cleanWord(String next) {
 		// First, if there is an apostrophe, the substring
 		// before the apostrophe is used and the rest is ignored.
@@ -96,29 +132,33 @@ public class A2 {
 	 */
 	private void printResults() {
 		System.out.println("Total number of words: " + totalwordcount);
-		//System.out.println("Number of Avengers Mentioned: " + ??);
+		System.out.println("Number of Avengers Mentioned: " + mentionList.size());
 		System.out.println();
 
 		System.out.println("All avengers in the order they appeared in the input stream:");
 		// Todo: Print the list of avengers in the order they appeared in the input
 		// Make sure you follow the formatting example in the sample output
+		mentionList.printLinkedList();
 
 		System.out.println();
 		
 		System.out.println("Top " + topN + " most popular avengers:");
 		// Todo: Print the most popular avengers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
+		mostPopularAvenger.printTopFour();
 		
 		System.out.println();
 
 		System.out.println("Top " + topN + " most popular performers:");
 		// Todo: Print the most popular performers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
+		mostPopularPerformer.printTopFour();
 		
 		System.out.println();
 
 		System.out.println("All mentioned avengers in alphabetical order:");
 		// Todo: Print the list of avengers in alphabetical order
+		alphabticalList.printLinkedList();
 		
 		System.out.println();
 	}

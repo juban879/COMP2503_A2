@@ -2,7 +2,7 @@ import java.util.Comparator;
 
 public class SLL<T extends Comparable<T>> {
 	
-	private Node<T> start;
+	public Node<T> start;
 	private Node<T> end;
 	private int size;
 	private Comparator<T> comparator;
@@ -31,12 +31,17 @@ public class SLL<T extends Comparable<T>> {
 
 	public SLL(Comparator<T> externalComp) {
 		start = null;
-		size = 0;
 		comparator = externalComp;
 	}
 
 	public int size() {
-		return size;
+		Node<T> mover = start;
+		int len = 0;
+		while(mover != null) {
+			len++;
+			mover = mover.getNext();
+		}
+		return len;
 	}
 
 	private int compare(T a1, T a2) {
@@ -47,42 +52,57 @@ public class SLL<T extends Comparable<T>> {
 	}
 
 	// note: compare method needs to be properly implemented in addInOrder method below:
-	private void addInOrder(Node<T> n) {
+	public void addInOrder(Node<T> n) {
+		
 		if (isEmpty()) {
-			addAvenger(n);
+			addAvengerToStart(n);
 		} else {
-			if (n.getData().compareTo(start.getData()) <= 0)
-				addAvenger(n);
+			if (compare(n.getData(), start.getData()) <= 0)
+				addAvengerToStart(n);
 			else {
 				Node<T> currentAvenger = start;
-				while (currentAvenger.getNext() != null && n.getData().compareTo(currentAvenger.getNext().getData()) > 0) {
+				while (currentAvenger.getNext() != null && compare(n.getData(), currentAvenger.getNext().getData()) > 0) {
+					// n.getData().compareTo(currentAvenger.getNext().getData()) > 0 ignore for now
 					currentAvenger = currentAvenger.getNext();
 				}
-				
 				if (currentAvenger.getNext() == null) {
-					
-					
-				} else { 
+					addAvengerToEnd(n);
+				} else {
 					n.setNext(currentAvenger.getNext());
 					currentAvenger.setNext(n);
 				}
+
 			}
 		}
 		
 	}
-	
-	private void addAvengerToStart(Node<T> n) {
+
+	public void addAvengerToStart(Node<T> n) {
+		
+		if (isEmpty()) {
+			start = n;
+			end = n;
+		} else {
+			n.setNext(start);
+			start = n;
+		}
 		
 		
 	}
 
-	private void addAvengerToEnd(Node<T> n) {
-
+	public void addAvengerToEnd(Node<T> n) {
 		
+		if (isEmpty()) {
+			addAvengerToStart(n);
+		} else {
+			end.setNext(n);
+			end = n;
+		}
+	
 	}
 
 	// it kept giving me an error so type changed to Object - idk if thats right, i feel like it def isn't
-	private Object deleteAvenger(T key) {
+	public Object deleteAvenger(T key) {
 		Node<T> currentAvenger = start;
 		Node<T> previousAvenger = start;
 		while (currentAvenger != null) {
@@ -116,15 +136,51 @@ public class SLL<T extends Comparable<T>> {
 		
 	}
 
-	private Node<T> findAvenger(T key) {
+	public Node<T> findAvenger(T avg) {
 		Node<T> currentAvenger = start;
 		while (currentAvenger != null) {
-			if (currentAvenger.getData().equals(key))
+			
+			if (currentAvenger.getData().equals(avg)) 
+			{
 				return currentAvenger;
-			else 
-				currentAvenger = currentAvenger.getNext();
+			}
+			currentAvenger = currentAvenger.getNext();
+
+		}
+		return null;
+	}
+	
+	public Node<T> get(int i){
+		int len = size();
+		Node<T> nodeToGet = null;
+		
+		if(i < len && i >= 0) {
+			Node<T> mover = start;
+			for(int count = 0; count < i; count++) {
+				mover = mover.getNext();
+			}
+			nodeToGet = mover;
+		}
+		return nodeToGet;
+	}
+	
+	public void printLinkedList() {
+	       Node<T> currentNode = start;
+	       while (currentNode != null) 
+	       {
+	           System.out.println(currentNode.getData());
+	           currentNode = currentNode.getNext();
+	       }
+	}
+	public void printTopFour() {
+		Node<T> currentNode = start;
+		int count = 0;
+		
+		while(currentNode != null && count <= 3) {
+			System.out.println(currentNode.getData());
+			currentNode = currentNode.getNext();
+			count++;
 		}
 		
-		return null;
 	}
 }

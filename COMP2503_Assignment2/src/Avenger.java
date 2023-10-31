@@ -110,6 +110,18 @@ public class Avenger implements Comparable<Avenger>{
 	public void setPerformerFreq() {
 		this.performerFreq++;
 	}
+	
+	public boolean addFrequency(String word) {
+		if (heroAlias.equals(word))
+			setAliasFreq();
+		else if (heroName.equals(word))
+			setNameFreq();
+		else if (performer.equals(word))
+			setPerformerFreq();
+		else
+			return false;
+		return true;
+	}
 	/**
 	 * Overridden toString method to print avenger details according to output examples
 	 */
@@ -124,10 +136,11 @@ public class Avenger implements Comparable<Avenger>{
 	 * @param Avenger a avenger object
 	 * @return boolean flag, returns true if objects are the same, false if else
 	 */
-	public boolean equals(Avenger a) {
+	@Override 
+	public boolean equals(Object a) {
 		boolean flag = false;
-		
-		if(this.getHeroAlias().equals(a.getHeroAlias())) {
+		Avenger avg = (Avenger) a;
+		if(this.getHeroAlias().equals(avg.getHeroAlias())) {
 			flag = true;
 		}
 		
