@@ -7,7 +7,7 @@ import java.util.Scanner;
  * This program reads a input stream and keeps track of the statistics for avengers
  * mentioned by name, alias, or performer's last name.
  *
- * @author Maryam Elahi
+ * @author alyssalandeta starlynrivas jannubana
  * @date Fall 2023
 */
 
@@ -28,26 +28,28 @@ public class A2 {
 	private SLL<Avenger> mostPopularAvenger = new SLL<Avenger>(new AvengerComparatorFreqDesc());
 	private SLL<Avenger> mostPopularPerformer = new SLL<Avenger>(new AvengerPerformerComparatorFreqDesc());
 	
+	/**
+	 * Main matheod to run the program
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		A2 a1 = new A2();
 		a1.run();
 	}
 
+	/**
+	 * This method calls the methods required to run the program
+	 */
 	public void run() {
 		readInput();
 		createdOrderedLists();
 		printResults();
 	}
 
+	/**
+	 * This method uses a mover node to traverse through the mentionList, adds the appropriate avenger to the other 3 singly linked lists.
+	 */
 	private void createdOrderedLists() {
-		// TODO: 
-		/* Create a mover and traverse through the mentionList.
-		// Add each avenger to the other three lists. 
-		// Hint: For this assignment you can expose the reference 
-		// 	     to the first element in the linked list, and create a mover to traverse the list.
-		//       (The better solution is to create an iterator, but we haven't learned about them, 
-		// 		  will talk about iterators later.)
-		*/ 
 		Node<Avenger> mover =  mentionList.start;
 		while(mover != null) {
 			Node<Avenger> avg = new Node<>(mover.getData());
@@ -64,7 +66,7 @@ public class A2 {
 	}
 
 	/**
-	 * read the input stream and keep track  
+	 * read the input stream and keep track of avengers,
 	 * how many times avengers are mentioned by alias or last name.
 	 */
 	private void readInput() {
@@ -78,6 +80,7 @@ public class A2 {
 				- if this avenger has already been mentioned, increase the corresponding frequency count for the object already in the mentionList.
 				- if this avenger has not been mentioned before, add the newly created avenger to the mentionList, remember to update the corresponding frequency.
 		*/
+		
 		while (input.hasNext()) {
 
 			String word = cleanWord(input.next());
@@ -102,6 +105,11 @@ public class A2 {
 		}
 	}
 		
+	/**
+	 * This method creates an Avenger object from the word detected from the input stream
+	 * @param word String word that is detected as part of Avenger data
+	 * @return new Avenger object created
+	 */
 	private Avenger createAvengerObject(String word) {
 			for (int i = 0; i < avengerRoster.length; i++) {
 				if (avengerRoster[i][0].equals(word) || avengerRoster[i][1].equals(word)
@@ -112,6 +120,12 @@ public class A2 {
 			return null;
 		}
 
+	/**
+	 * This method is used to "clean" the word from the input stream by removing any extra characters, spaces,
+	 * and converts word to lowercase.
+	 * @param next String word to be cleaned
+	 * @return ret String that is cleaned 
+	 */
 	private String cleanWord(String next) {
 		// First, if there is an apostrophe, the substring
 		// before the apostrophe is used and the rest is ignored.
@@ -128,7 +142,7 @@ public class A2 {
 	
 
 	/**
-	 * print the results
+	 * This method print the results
 	 */
 	private void printResults() {
 		System.out.println("Total number of words: " + totalwordcount);

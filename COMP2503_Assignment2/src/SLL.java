@@ -1,5 +1,10 @@
 import java.util.Comparator;
-
+/**
+ * Singly Linked List class 
+ * @author alyssalandeta starlynrivas jannubana
+ *
+ * @param <T>
+ */
 public class SLL<T extends Comparable<T>> {
 	
 	public Node<T> start;
@@ -7,21 +12,19 @@ public class SLL<T extends Comparable<T>> {
 	private int size;
 	private Comparator<T> comparator;
 
+	/**
+	 * SLL constructor 
+	 */
 	public SLL() {
 		start = null;
 		size = 0;
 		comparator = null;
 	}
 
-	public void addAvengerToStart(T data) {
-	}
-
-	public void addAvengerToEnd(T data) {
-	}
-
-	public void addInOrder(T data) {
-	}
-	
+	/**
+	 * Method to check if the Singly Linked List is empty
+	 * @return true if it is empty, false if else
+	 */
 	public boolean isEmpty() {
 		if (start == null)
 			return true;
@@ -29,11 +32,19 @@ public class SLL<T extends Comparable<T>> {
 			return false;
 	}
 
+	/**
+	 * SLL constructor that takes in External Comparator
+	 * @param externalComp externam comparator
+	 */
 	public SLL(Comparator<T> externalComp) {
 		start = null;
 		comparator = externalComp;
 	}
 
+	/**
+	 * Method to return the size of the SLL
+	 * @return len int that holds the size of the list
+	 */
 	public int size() {
 		Node<T> mover = start;
 		int len = 0;
@@ -44,6 +55,12 @@ public class SLL<T extends Comparable<T>> {
 		return len;
 	}
 
+	/**
+	 * Compare method that adresses if there is no Comparator passed to the constructor.
+	 * @param a1
+	 * @param a2
+	 * @return
+	 */
 	private int compare(T a1, T a2) {
 		if (comparator == null)
 			return a1.compareTo(a2);
@@ -51,7 +68,11 @@ public class SLL<T extends Comparable<T>> {
 			return comparator.compare(a1, a2);
 	}
 
-	// note: compare method needs to be properly implemented in addInOrder method below:
+	/**
+	 * This method adds the Avenger to the appropriate place in the singly linked list 
+	 * depending and compares and sorts the the avengers accordingly
+	 * @param n
+	 */
 	public void addInOrder(Node<T> n) {
 		
 		if (isEmpty()) {
@@ -77,6 +98,10 @@ public class SLL<T extends Comparable<T>> {
 		
 	}
 
+	/**
+	 * This method adds the Avenger node to the start of the list
+	 * @param n
+	 */
 	public void addAvengerToStart(Node<T> n) {
 		
 		if (isEmpty()) {
@@ -90,6 +115,10 @@ public class SLL<T extends Comparable<T>> {
 		
 	}
 
+	/**
+	 * This method adds the Avenger node to the end of the list
+	 * @param n
+	 */
 	public void addAvengerToEnd(Node<T> n) {
 		
 		if (isEmpty()) {
@@ -101,7 +130,11 @@ public class SLL<T extends Comparable<T>> {
 	
 	}
 
-	// it kept giving me an error so type changed to Object - idk if thats right, i feel like it def isn't
+	/**
+	 * Remove an Avenger node method
+	 * @param key
+	 * @return
+	 */
 	public Object deleteAvenger(T key) {
 		Node<T> currentAvenger = start;
 		Node<T> previousAvenger = start;
@@ -136,8 +169,13 @@ public class SLL<T extends Comparable<T>> {
 		
 	}
 
+	/**
+	 * Finds the avenger in the SLL by traversing the list
+	 * @param avg
+	 * @return Avenger being searched for in the list
+	 */
 	public Node<T> findAvenger(T avg) {
-		Node<T> currentAvenger = start;
+		Node<T> currentAvenger = start; // mover node
 		while (currentAvenger != null) {
 			
 			if (currentAvenger.getData().equals(avg)) 
@@ -150,6 +188,11 @@ public class SLL<T extends Comparable<T>> {
 		return null;
 	}
 	
+	/**
+	 * Method used to get a specific node by traversing list 
+	 * @param i
+	 * @return Node<T> node to be returned
+	 */
 	public Node<T> get(int i){
 		int len = size();
 		Node<T> nodeToGet = null;
@@ -164,6 +207,9 @@ public class SLL<T extends Comparable<T>> {
 		return nodeToGet;
 	}
 	
+	/**
+	 * method used to print the mentionList
+	 */
 	public void printLinkedList() {
 	       Node<T> currentNode = start;
 	       while (currentNode != null) 
@@ -172,6 +218,10 @@ public class SLL<T extends Comparable<T>> {
 	           currentNode = currentNode.getNext();
 	       }
 	}
+	
+	/**
+	 * method used to print only 4 avengers
+	 */
 	public void printTopFour() {
 		Node<T> currentNode = start;
 		int count = 0;

@@ -1,5 +1,9 @@
 import java.util.Comparator;
-
+/**
+ * Avenger Comparator class to order the top 4 most frequently mentioned avengers, and handles tie breaks accordingly.
+ * @author alyssalandeta
+ *
+ */
 public class AvengerComparatorFreqDesc implements Comparator<Avenger> {
 	@Override
 	/** 

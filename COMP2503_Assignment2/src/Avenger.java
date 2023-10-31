@@ -1,4 +1,8 @@
-
+/**
+ * This is the Avenger class that represents an avenger object.
+ * @author alyssalandeta starlynrivas jannubana
+ *
+ */
 public class Avenger implements Comparable<Avenger>{
 	
 
@@ -111,6 +115,12 @@ public class Avenger implements Comparable<Avenger>{
 		this.performerFreq++;
 	}
 	
+	/**
+	 * This method checks if the word is alias, hero name, or performer name, then
+	 * calls the setting frquency methods that increment the counters
+	 * @param word String used to check if alias, hero name, or performer name
+	 * @return boolean false, if not any of the above, true if else
+	 */
 	public boolean addFrequency(String word) {
 		if (heroAlias.equals(word))
 			setAliasFreq();

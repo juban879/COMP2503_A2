@@ -1,5 +1,9 @@
 import java.util.Comparator;
-
+/**
+ * Avenger Performer Comparator class that sorts avengers by descending performer frequency, and handles any tie breaks accordingly.
+ * @author alyssalandeta/mariam solution
+ *
+ */
 public class AvengerPerformerComparatorFreqDesc implements Comparator<Avenger> {
 	@Override
 	/**
