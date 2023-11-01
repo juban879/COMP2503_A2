@@ -3,7 +3,7 @@
  * @author alyssalandeta starlynrivas jannubana
  *
  */
-public class Avenger implements Comparable<Avenger>{
+public class Avenger implements Comparable<Avenger> {
 	
 
 	private String heroName;

@@ -95,16 +95,17 @@ public class SLL<T extends Comparable<T>> {
 
 			}
 		}
-		
 	}
-	public void addInOrder(T data) {addInOrder(new Node<>(data));}
+	
+	public void addInOrder(T data) {
+		addInOrder(new Node<>(data));
+		}
 
 	/**
 	 * This method adds the Avenger node to the start of the list
 	 * @param n
 	 */
 	private void addAvengerToStart(Node<T> n) {
-		
 		if (isEmpty()) {
 			start = n;
 			end = n;
@@ -112,16 +113,17 @@ public class SLL<T extends Comparable<T>> {
 			n.setNext(start);
 			start = n;
 		}
-		
-		
 	}
-	public void addAvengerToStart(T data) {addAvengerToStart(new Node<>(data));}
+	
+	public void addAvengerToStart(T data) {
+		addAvengerToStart(new Node<>(data));
+		}
+	
 	/**
 	 * This method adds the Avenger node to the end of the list
 	 * @param n
 	 */
 	private void addAvengerToEnd(Node<T> nodeToAdd) {
-		
 		if (isEmpty()) {
 			addAvengerToStart(nodeToAdd);
 		} else {
@@ -130,7 +132,9 @@ public class SLL<T extends Comparable<T>> {
 		}
 	
 	}
-	public void addAvengerToEnd (T data) {addAvengerToEnd(new Node<>(data));}
+	public void addAvengerToEnd (T data) {
+		addAvengerToEnd(new Node<>(data));
+		}
 
 	/**
 	 * Remove an Avenger node method
@@ -177,7 +181,6 @@ public class SLL<T extends Comparable<T>> {
 	 * @return Avenger being searched for in the list
 	 */
 	private Node<T> findNode(T data) {
-		
 		Node<T> currentAvenger = start; // mover node
 		while (currentAvenger != null) {
 			
@@ -189,6 +192,7 @@ public class SLL<T extends Comparable<T>> {
 		}
 		return null;
 	}
+	
 	public T findAvenger(T data) {
 		if(findNode(data) == null)
 			return null;
@@ -209,10 +213,8 @@ public class SLL<T extends Comparable<T>> {
 			Node<T> mover = start;
 			for(int count = 0; count < i; count++) {
 				mover = mover.getNext();
-			}
-			nodeToGet = mover;
-		}
-		return nodeToGet;
+			} nodeToGet = mover;
+		} return nodeToGet;
 	}
 	
 	/**
@@ -220,8 +222,7 @@ public class SLL<T extends Comparable<T>> {
 	 */
 	public void printLinkedList() {
 	       Node<T> currentNode = start;
-	       while (currentNode != null) 
-	       {
+	       while (currentNode != null) {
 	           System.out.println(currentNode.getData());
 	           currentNode = currentNode.getNext();
 	       }
